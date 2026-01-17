@@ -1,0 +1,74 @@
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+venv/
+ENV/
+env/
+
+# OAuth & Credentials
+credentials.json
+token.json
+*.key
+*.pem
+
+# Logs
+*.log
+z_temp/*
+!z_temp/.gitkeep
+
+# OS Files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+.cursorrules
+
+# Temporary files
+*.tmp
+*.temp
+tmp/
+temp/
+
+# Drive folders (user data)
+Drive - */*
+!Drive - Example/.gitkeep
+
+# MCP secrets (config structure is OK, but not filled-in secrets)
+# .agent/mcp_config.json should be committed as a template
+
+# Node modules (if using MCP servers)
+node_modules/
+package-lock.json
+
+# Backup files
+*.bak
+*.backup

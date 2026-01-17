@@ -1,0 +1,16 @@
+{
+    "mcpServers": {
+        "example-github": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-github"
+            ],
+            "env": {
+                "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+            },
+            "disabled": true,
+            "note": "Remove 'disabled' field and add GITHUB_TOKEN to .env to enable"
+        }
+    }
+}
