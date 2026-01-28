@@ -12,28 +12,28 @@ You operate within a 5-layer architecture that separates concerns to maximize re
 
 **Layer 1: SOPs (What to do)**
 
-- Written in Markdown, live in `1. SOPs/`
+- Written in Markdown, live in `Operator Team OS/1. SOPs/`
 - Human-readable process documentation
 - Define goals, context, inputs, outputs, and edge cases
 - Natural language instructions, like you'd give a mid-level employee
 
 **Layer 2: Agents (Who to be)**
 
-- Specialized personas in `2. Agents/`
+- Specialized personas in `Operator Team OS/2. Agents/`
 - Define voice, expertise, model preference, and decision-making style
 - Activated when specific persona/expertise is needed
 
 **Layer 2a: The Activation Pattern (How to "Be" an Agent)**
 To create a switchable persona:
-1.  **Define (`2. Agents/MyAgent.md`)**: The "Resume" (Voice, Model, Tools).
-2.  **Trigger (`4. Workflows/be-my-agent.md`)**: The "Job Order".
-    - Content: "You are now [Agent Name]. Read `2. Agents/MyAgent.md` and adopt persona."
+1.  **Define (`Operator Team OS/2. Agents/MyAgent.md`)**: The "Resume" (Voice, Model, Tools).
+2.  **Trigger (`Operator Team OS/4. Workflows/be-my-agent.md`)**: The "Job Order".
+    - Content: "You are now [Agent Name]. Read `Operator Team OS/2. Agents/MyAgent.md` and adopt persona."
 3.  **Sync**: Run `workflow-sync` to make the slash command available.
 
 
 **Layer 3: Skills (How to execute)**
 
-- Anthropic-format skills in `3. Skills/`
+- Anthropic-format skills in `Operator Team OS/3. Skills/`
 - Each skill has `SKILL.md` (instructions + YAML frontmatter) + `scripts/` (code)
 
 - **Progressive disclosure**: Read YAML frontmatter first, load full instructions only when needed
@@ -41,7 +41,7 @@ To create a switchable persona:
 
 **Layer 4: Workflows (Sequences)**
 
-- Live in `4. Workflows/` (Canonical Source)
+- Live in `Operator Team OS/4. Workflows/` (Canonical Source)
 - Symlinked to `.agent/workflows` for Antigravity compatibility (allows `/` slash commands)
 - Sequential "fire and forget" instructions for repetitive technical tasks
 - If Antigravity is used, supports `// turbo` mode for auto-execution
@@ -60,15 +60,14 @@ To create a switchable persona:
 
 When user requests a task:
 
-1. **Scan `3. Skills/`** for matching skill folders
+1. **Scan `Operator Team OS/3. Skills/`** for matching skill folders
 2. **Read YAML frontmatter** in `SKILL.md` to check relevance (description field)
 3. **Load full skill** only if relevant—keeps context lean
 4. **Execute scripts** in `scripts/` subfolder as directed by SKILL.md
 
 Example skill structure:
 ```
-3. Skills/
-
+Operator Team OS/3. Skills/
 ├── data-processing/      # Domain-specific skill
 │   ├── SKILL.md          # YAML frontmatter + detailed instructions
 │   └── scripts/          # Python scripts for this skill
@@ -91,18 +90,18 @@ MCP servers provide the raw connections to external tools (GitHub, Database, etc
 
 **3. Access Control (The Permission Gate)**
 - **Availability**: Adding it to the config makes it *technically* available.
-- **Permission**: An Agent will **only** use the tool if you explicitly list it in their persona file (`2. Agents/*.md`) under the `tools:` key.
+- **Permission**: An Agent will **only** use the tool if you explicitly list it in their persona file (`Operator Team OS/2. Agents/*.md`) under the `tools:` key.
 - **Protocol**: Never give an Agent "all tools". Only license them for what they need.
 
 **4. Best Practice: Dual Listing**
 Since we use both Agents and Skills, list tools in **both** places:
-1.  **In `2. Agents/*.md`**: Grants the *Permission* for the agent to use it.
-2.  **In `3. Skills/*/SKILL.md`**: Adds `allowed-tools: [tool_name]` to the frontmatter. This helps the Orchestrator know *what capabilities a skill requires*.
+1.  **In `Operator Team OS/2. Agents/*.md`**: Grants the *Permission* for the agent to use it.
+2.  **In `Operator Team OS/3. Skills/*/SKILL.md`**: Adds `allowed-tools: [tool_name]` to the frontmatter. This helps the Orchestrator know *what capabilities a skill requires*.
 
 ## Operating Principles
 
 **1. Check for skills first**
-Before writing a script, check `3. Skills/` for an existing skill. Only create new skills/scripts if none exist.
+Before writing a script, check `Operator Team OS/3. Skills/` for an existing skill. Only create new skills/scripts if none exist.
 
 **2. Self-anneal when things break**
 
@@ -160,18 +159,18 @@ Errors are learning opportunities. When something breaks:
 
 **Directory structure:**
 
-- `z_temp/` - **MANDATORY** for all one-off processing, intermediate files, and temporary automation scripts (e.g., `checkfiles.py`, `pdf_list.txt`). These files must never be created in the root or major project folders.
-- `1. SOPs/` - Human-readable process docs (the instruction set)
-- `2. Agents/` - Specialized AI personas
-- `3. Skills/` - Anthropic-format skills with scripts
+- `Operator Team OS/z_temp/` - **MANDATORY** for all one-off processing, intermediate files, and temporary automation scripts (e.g., `checkfiles.py`, `pdf_list.txt`). These files must never be created in the root or major project folders.
+- `Operator Team OS/1. SOPs/` - Human-readable process docs (the instruction set)
+- `Operator Team OS/2. Agents/` - Specialized AI personas
+- `Operator Team OS/3. Skills/` - Anthropic-format skills with scripts
   - `_shared/` - Utilities used across skills
   - `<skill-name>/` - Individual skill folders
-- `4. Workflows/` - Sequential execution plans
+- `Operator Team OS/4. Workflows/` - Sequential execution plans
 - `Drive - *` - Long-term storage (e.g., `Drive - ProjectX`)
 - `.env` - Environment variables and API keys
 - `credentials.json`, `token.json` - OAuth credentials (add to `.gitignore`)
 
-**Key principle:** Local files are only for processing. Deliverables live in cloud services where the user can access them. Everything in `z_temp/` is ephemeral and should be deleted once the task is complete.
+**Key principle:** Local files are only for processing. Deliverables live in cloud services where the user can access them. Everything in `Operator Team OS/z_temp/` is ephemeral and should be deleted once the task is complete.
 
 **Verification Protocol (Post-Operation):**
 **MANDATORY**: After any file deletion, move, or bulk rename operation, you must perform a verification check:
@@ -189,7 +188,7 @@ Errors are learning opportunities. When something breaks:
 
 **Cross-Platform Compatibility:**
 We support multiple AI agents (Antigravity, Claude Code, OpenDevin, Cursor, etc.) using a "Single Source of Truth" strategy:
-- **Canonical Files**: All instructions and workflows live in top-level folders (`1. SOPs/`, `2. Agents/`, `4. Workflows/`, `AGENTS.md`).
+- **Canonical Files**: All instructions and workflows live in top-level folders (`Operator Team OS/1. SOPs/`, `Operator Team OS/2. Agents/`, `Operator Team OS/4. Workflows/`, `AGENTS.md`).
 - **Platform-Specific folders**: If a platform requires a specific folder structure (e.g., `.agent/workflows`, `.cursorrules`), create a **symlink** pointing to the canonical location.
 - **Do NOT duplicate files**: Never copy files to platform folders. Always symlink.
 

@@ -89,10 +89,10 @@ This framework can work with:
 
 Start with `AGENTS.md` to understand the architecture, then explore:
 
-- `1. SOPs/` for example processes
-- `2. Agents/` for example persona definitions
-- `3. Skills/` for example automation utilities
-- `4. Workflows/` for example quick-start commands
+- `Operator Team OS/1. SOPs/` for example processes
+- `Operator Team OS/2. Agents/` for example persona definitions
+- `Operator Team OS/3. Skills/` for example automation utilities
+- `Operator Team OS/4. Workflows/` for example quick-start commands
 
 ### 4. Try It Out
 
@@ -152,7 +152,9 @@ Plug in external tools via Model Context Protocol (GitHub, Slack, Databases, etc
 
 ```
 operator-os/
-├── AGENTS.md              # Core architecture documentation (read this first!)
+├── AGENTS.md              # Core architecture documentation
+├── CLAUDE.md              → AGENTS.md (symlink)
+├── GEMINI.md              → AGENTS.md (symlink)
 ├── README.md              # This file
 ├── SETUP.md               # Detailed setup guide
 ├── .env.example           # API key template
@@ -160,25 +162,16 @@ operator-os/
 │
 ├── .agent/                # Platform-specific configuration
 │   ├── mcp_config.json    # MCP server definitions
-│   └── workflows/         # Symlink to 4. Workflows/
+│   └── workflows/         → Operator Team OS/4. Workflows/ (symlink)
 │
-├── 1. SOPs/               # Standard Operating Procedures
-│   └── ...
+├── Operator Team OS/      # Operating system container
+│   ├── 1. SOPs/           # Standard Operating Procedures
+│   ├── 2. Agents/         # Agent persona definitions
+│   ├── 3. Skills/         # Executable skills with scripts
+│   ├── 4. Workflows/      # Sequential automation
+│   └── z_temp/            # Temporary processing files
 │
-├── 2. Agents/             # Agent persona definitions
-│   ├── Board-Strategy.md
-│   ├── Board-Risk.md
-│   └── ...
-│
-├── 3. Skills/             # Executable skills with scripts
-│   └── ...
-│
-├── 4. Workflows/          # Sequential automation
-│   ├── weekly-review.md
-│   └── consult-board.md
-│
-├── Drive - Example/       # Example data folder
-└── z_temp/                # Temporary processing files
+└── Drive - Example/       # Example data folder
 ```
 
 ## Philosophy
@@ -204,7 +197,7 @@ Start simple. Add layers only when needed. No premature abstraction.
 This framework is **tool-agnostic** by design, but different AI platforms may require minor tweaks:
 
 - **Antigravity**: Automatically detects `.agent/` folder and workflows. Slash commands work out of the box.
-- **Claude Code**: Reference agents directly: "Act as ResearchAgent from `2. Agents/ResearchAgent.md`"
+- **Claude Code**: Reference agents directly: "Act as ResearchAgent from `Operator Team OS/2. Agents/ResearchAgent.md`"
 - **Cursor**: Works natively with file context. Point to `AGENTS.md` in your first message.
 - **Gemini**: Create `GEMINI.md` symlink to `AGENTS.md` (instructions in SETUP.md)
 - **Custom setups**: You may need to adjust symlinks or add platform-specific config files
@@ -239,6 +232,6 @@ MIT License - see LICENSE file for details.
 
 - **Full Documentation**: See `AGENTS.md`
 - **Setup Guide**: See `SETUP.md`
-- **Example Skills**: Explore `3. Skills/`
+- **Example Skills**: Explore `Operator Team OS/3. Skills/`
 
 

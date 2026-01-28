@@ -36,7 +36,7 @@ Or manually create the symlinks after cloning:
 mklink CLAUDE.md AGENTS.md
 mklink GEMINI.md AGENTS.md
 cd .agent
-mklink /D workflows "..\4. Workflows"
+mklink /D workflows "..\Operator Team OS\4. Workflows"
 ```
 
 ### 2. Set Up Environment Variables (Optional)
@@ -94,13 +94,13 @@ If using Antigravity or platforms that support slash commands:
 
 The workflows are already symlinked:
 ```
-.agent/workflows/ → 4. Workflows/
+.agent/workflows/ → Operator Team OS/4. Workflows/
 ```
 
 If you need to recreate the symlink:
 ```bash
 cd .agent/workflows
-ln -s ../../4. Workflows/* .
+ln -s ../../Operator Team OS/4. Workflows/* .
 ```
 
 ## Platform-Specific Setup
@@ -136,7 +136,7 @@ ln -s AGENTS.md GEMINI.md
 1. Open Cursor in the `operator-os` directory
 2. The AI will automatically see all files
 3. In your first message, reference: "Read `AGENTS.md` to understand the system architecture"
-4. Reference specific agents: "Act as the Research Agent defined in `2. Agents/ResearchAgent.md`"
+4. Reference specific agents: "Act as the Research Agent defined in `Operator Team OS/2. Agents/ResearchAgent.md`"
 
 ### For Antigravity
 
@@ -165,11 +165,11 @@ cat AGENTS.md
 
 ### 2. Explore the Examples
 
-**SOPs**: Check out `1. SOPs/` to see how to document processes
+**SOPs**: Check out `Operator Team OS/1. SOPs/` to see how to document processes
 
-**Agents**: Review `2. Agents/Board-Strategy.md` to see a persona definition
+**Agents**: Review `Operator Team OS/2. Agents/Board-Strategy.md` to see a persona definition
 
-**Skills**: Look at `3. Skills/pdf-conversion/` to see how skills are structured
+**Skills**: Look at `Operator Team OS/3. Skills/pdf-conversion/` to see how skills are structured
 
 **Workflows**: Try `/consult-board` to ask strategic questions
 
@@ -177,10 +177,10 @@ cat AGENTS.md
 
 ### Add Your Own SOPs
 
-Create a new file in `1. SOPs/`:
+Create a new file in `Operator Team OS/1. SOPs/`:
 
 ```bash
-touch "1. SOPs/my-custom-process.md"
+touch "Operator Team OS/1. SOPs/my-custom-process.md"
 ```
 
 Follow the template structure:
@@ -194,10 +194,10 @@ Follow the template structure:
 
 ### Create Custom Agents
 
-Create a new agent in `2. Agents/`:
+Create a new agent in `Operator Team OS/2. Agents/`:
 
 ```bash
-touch "2. Agents/MyCustomAgent.md"
+touch "Operator Team OS/2. Agents/MyCustomAgent.md"
 ```
 
 Define:
@@ -227,17 +227,17 @@ Agent: "Create a new skill for [task description]"
 
 Or manually:
 ```bash
-mkdir "3. Skills/my-new-skill"
-touch "3. Skills/my-new-skill/SKILL.md"
-mkdir "3. Skills/my-new-skill/scripts"
+mkdir "Operator Team OS/3. Skills/my-new-skill"
+touch "Operator Team OS/3. Skills/my-new-skill/SKILL.md"
+mkdir "Operator Team OS/3. Skills/my-new-skill/scripts"
 ```
 
 ### Add Workflows
 
-Create a workflow in `4. Workflows/`:
+Create a workflow in `Operator Team OS/4. Workflows/`:
 
 ```bash
-touch "4. Workflows/my-workflow.md"
+touch "Operator Team OS/4. Workflows/my-workflow.md"
 ```
 
 Format:
@@ -272,7 +272,7 @@ description: Short description of what this does
 
 ### Workflows Not Showing Up
 - **Check**: Is `.agent/workflows/` symlinked correctly?
-- **Fix**: `cd .agent/workflows && ln -s ../../4. Workflows/* .`
+- **Fix**: `cd .agent/workflows && ln -s ../../Operator Team OS/4. Workflows/* .`
 
 ## Advanced Configuration
 
