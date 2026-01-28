@@ -22,7 +22,7 @@ PDFs often contain valuable content locked in an uneditable format. This SOP use
 - Check for existing markdown files to avoid re-processing
 
 ### 2. Convert Each PDF
-- Use `3. Skills/pdf-conversion/` skill
+- Use `Operator Team OS/3. Skills/pdf-conversion/` skill
 - Extract text while preserving:
   - Headings and hierarchy
   - Lists and tables
@@ -56,4 +56,4 @@ PDFs often contain valuable content locked in an uneditable format. This SOP use
 - Processing log with any errors or warnings
 
 ## Skills Used
-- `3. Skills/pdf-conversion/`
+- `Operator Team OS/3. Skills/pdf-conversion/`

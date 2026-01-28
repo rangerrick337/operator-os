@@ -23,10 +23,10 @@ This workflow acts as a receptionist for the "Stable of Experts" system. It rout
 
 1. **Adopt Persona**:
    - Once the Board is selected, **read the corresponding Agent file** to adopt the full persona:
-     - Strategy: `2. Agents/Board-Strategy.md`
-     - Risk: `2. Agents/Board-Risk.md`
-     - Product: `2. Agents/Board-Product.md`
-     - Mindset: `2. Agents/Board-Mindset.md`
+     - Strategy: `Operator Team OS/2. Agents/Board-Strategy.md`
+     - Risk: `Operator Team OS/2. Agents/Board-Risk.md`
+     - Product: `Operator Team OS/2. Agents/Board-Product.md`
+     - Mindset: `Operator Team OS/2. Agents/Board-Mindset.md`
 
 2. **Execute**:
    - Proceed to run the session as defined in the Agent's instructions.

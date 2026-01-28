@@ -13,7 +13,7 @@ This is a template SOP showing how to structure process documentation for data t
 
 ## Outputs
 - **Processed File**: `Drive - ProjectX/Data/output.csv`
-- **Log File**: `z_temp/processing_log.txt`
+- **Log File**: `Operator Team OS/z_temp/processing_log.txt`
 
 ## Process
 
@@ -38,7 +38,7 @@ This is a template SOP showing how to structure process documentation for data t
 - Log any errors or warnings
 
 ### 5. Cleanup
-- Move intermediate files to `z_temp/`
+- Move intermediate files to `Operator Team OS/z_temp/`
 - Archive processed files if needed
 - Update processing log
 
@@ -54,6 +54,6 @@ This is a template SOP showing how to structure process documentation for data t
 - Error report if any issues occurred
 
 ## Skills/Tools Used
-- `3. Skills/data-processing/` (if exists)
+- `Operator Team OS/3. Skills/data-processing/` (if exists)
 - Python pandas for data manipulation
 - Standard logging utilities

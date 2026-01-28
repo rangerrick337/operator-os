@@ -37,7 +37,7 @@ If the server requires API keys or tokens:
 3. Create `.env.example` with placeholder values for documentation
 
 ### 4. Grant Agent Permissions
-Edit the relevant agent file in `2. Agents/[AgentName].md` and add the tool to their `tools:` list:
+Edit the relevant agent file in `Operator Team OS/2. Agents/[AgentName].md` and add the tool to their `tools:` list:
 
 ```yaml
 tools:

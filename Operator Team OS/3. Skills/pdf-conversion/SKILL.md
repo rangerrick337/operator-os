@@ -15,7 +15,7 @@ Converts PDF files to clean, readable Markdown format with proper formatting, im
 - "Process PDFs in folder X"
 
 ## Related Resources
-- **SOP**: `1. SOPs/convert_pdfs_to_markdown.md`
+- **SOP**: `Operator Team OS/1. SOPs/convert_pdfs_to_markdown.md`
 
 ## Scripts
 
