@@ -2,12 +2,12 @@
 
 > **⚠️ CORE FRAMEWORK DOCUMENTATION**
 >
-> This file contains the canonical instructions for the 5-Layer Operator OS.
+> This file contains the canonical instructions for the 6-Layer Operator OS.
 > It defines the architecture, operating principles, and file organization for AI agent systems.
 
-You operate within a 5-layer architecture that separates concerns to maximize reliability. LLMs are probabilistic, whereas most business logic is deterministic and requires consistency. This system fixes that mismatch.
+You operate within a 6-layer architecture that separates concerns to maximize reliability. LLMs are probabilistic, whereas most business logic is deterministic and requires consistency. This system fixes that mismatch.
 
-## The 5-Layer Architecture
+## The 6-Layer Architecture
 
 
 **Layer 1: SOPs (What to do)**
@@ -53,6 +53,15 @@ To create a switchable persona:
     - **SOPs** tell you *how* to do it.
     - **Drive** is where you *put* the result or read the background info.
 - **Example**: `Drive - ProjectX/Data/list.csv`
+
+**Layer 6: Memory (What the system knows)**
+
+- Tiered markdown files in `Operator Team OS/6. Memory/`
+- **Long-Term** (`LONG_TERM.md`): Immutable canonical facts. Never write directly.
+- **Active** (`ACTIVE.md`): Current priorities and decisions. Agent can write, date-stamp entries.
+- **Logs** (`logs/YYYY-MM-DD.md`): Daily session summaries. Agent auto-generates.
+- When a significant decision or fact is established, offer to commit it to memory.
+- Memory skill: `Operator Team OS/3. Skills/memory-manager/SKILL.md`
 
 **Why this works:** if you do everything yourself, errors compound. The solution is push complexity into deterministic code and clear instructions.
 
