@@ -1,25 +1,18 @@
 ---
-description: Review and maintain the memory system. Prune stale entries, promote important logs, verify accuracy.
+type: workflow
+triggers: [/memory-review]
+requires: [memory-manage, memory-read]
+status: active
+tags: [type/workflow, status/active, type/memory]
+description: Review stale Active context and proposed Long-Term updates.
 ---
 
-# Memory Review & Maintenance
+# Memory Review
 
-1. **Load the memory skill**: Read `Operator Team OS/3. Skills/memory-manager/SKILL.md`.
-
-2. **Review Active Context (ACTIVE.md)**:
-   - Read `Operator Team OS/6. Memory/ACTIVE.md`.
-   - Flag any entries older than 30 days.
-   - Ask the user: "These entries are over 30 days old — still current, or should I archive/remove them?"
-
-3. **Scan Recent Logs**:
-   - Read the last 7 days of logs in `Operator Team OS/6. Memory/logs/`.
-   - Identify any repeated themes or decisions that should be promoted to Long-Term or Active tiers.
-   - Propose promotions to the user.
-
-4. **Verify Long-Term Memory (LONG_TERM.md)**:
-   - Read `Operator Team OS/6. Memory/LONG_TERM.md`.
-   - Check the `Last reviewed` date.
-   - If older than 30 days, walk through each section with the user to confirm accuracy.
-   - Update the `Last reviewed` date.
-
-5. **Summary**: Report what was reviewed, what changed, and any items the user should action.
+1. Query for current priorities, blockers, decisions, and pending proposals.
+2. Review relevant Active sections and recent handoffs; do not load every log.
+3. Present Long-Term proposals with source and rationale for approve, revise, or
+   reject decisions.
+4. Apply only confirmed promotions, prune Active only with evidence, and preserve
+   the proposal decision trail.
+5. Rebuild the index and summarize changes and unresolved items.

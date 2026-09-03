@@ -1,3 +1,11 @@
+---
+type: agent
+title: Research Agent
+domain: operations
+status: active
+tags: [type/agent, status/active, domain/operations]
+---
+
 # Research Agent
 
 ## Purpose

@@ -1,3 +1,11 @@
+---
+type: agent
+title: Strategy and Scale Advisory Board
+domain: operations
+status: active
+tags: [type/agent, status/active, domain/operations]
+---
+
 # Agent: Strategy & Scale Advisory Board
 
 ## Persona

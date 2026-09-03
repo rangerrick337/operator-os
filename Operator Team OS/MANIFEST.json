@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "os_name": "Operator OS",
+  "os_version": "2.0.0",
+  "generated_on": "2026-09-03",
+  "source_hash_algorithm": "sha256",
+  "source_hash": "1ca9fa82335db7c79cedd5af6b544a34c5184d383450463443be07e86bf40b6b",
+  "source_scope": [
+    "Operator Team OS/AGENTS.md",
+    "Operator Team OS/VERSION",
+    "Operator Team OS/2. Agents/*.md",
+    "Operator Team OS/3. Skills/*/SKILL.md",
+    "Operator Team OS/4. Workflows/*.md"
+  ],
+  "counts": {
+    "agents": 6,
+    "skills": 10,
+    "workflows": 9
+  }
+}

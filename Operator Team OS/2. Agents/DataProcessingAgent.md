@@ -1,3 +1,11 @@
+---
+type: agent
+title: Data Processing Agent
+domain: operations
+status: active
+tags: [type/agent, status/active, domain/operations]
+---
+
 # Data Processing Agent
 
 ## Purpose

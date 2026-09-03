@@ -1,3 +1,12 @@
+---
+type: sop
+title: Data Processing Template
+owner: shared
+status: active
+last-reviewed: 2026-09-03
+tags: [type/sop, status/active, domain/operations]
+---
+
 # SOP: Data Processing Template
 
 ## Goal

@@ -1,3 +1,12 @@
+---
+type: sop
+title: Add MCP Server
+owner: shared
+status: active
+last-reviewed: 2026-09-03
+tags: [type/sop, status/active, domain/it]
+---
+
 # SOP: Add MCP Server
 
 ## Goal

@@ -1,4 +1,9 @@
 ---
+type: workflow
+triggers: [/weekly-review]
+requires: [memory-read]
+status: active
+tags: [type/workflow, status/active, domain/operations]
 description: Summarize weekly progress and plan next steps
 ---
 

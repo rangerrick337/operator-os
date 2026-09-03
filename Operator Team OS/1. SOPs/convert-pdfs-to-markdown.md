@@ -1,3 +1,12 @@
+---
+type: sop
+title: Convert PDFs to Markdown
+owner: shared
+status: active
+last-reviewed: 2026-09-03
+tags: [type/sop, status/active, domain/operations]
+---
+
 # SOP: Convert PDFs to Markdown
 
 ## Goal

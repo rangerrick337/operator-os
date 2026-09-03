@@ -1,316 +1,75 @@
 # Setup Guide
 
-This guide will help you get the Operator OS running in your environment.
-
-> **Tip**: You can ask your AI to help you with setup. Just say "Read SETUP.md and help me get started." The AI can walk you through these steps and handle the technical details.
-
-## Prerequisites
-
-- **Python 3.9+** (for skills that use Python scripts)
-- **Node.js 18+** (for MCP servers)
-- **Git** (for version control)
-- **An AI platform** that supports file context:
-  - Anthropic Claude (via API or Code)
-  - Google Gemini
-  - Cursor
-  - Antigravity
-  - Similar agent frameworks
-
-## Installation
-
-### 1. Clone the Repository
+## 1. Clone and check the workspace
 
 ```bash
-git clone https://github.com/yourusername/operator-os.git
+git clone https://github.com/rangerrick337/operator-os.git
 cd operator-os
+python3 "Operator Team OS/3. Skills/workspace-doctor/scripts/operator_doctor.py"
 ```
 
-**Windows Users**: Git may not create symlinks correctly by default. Run this before cloning:
-```bash
-git config --global core.symlinks true
-```
+Python 3.10+ is sufficient for the core memory and doctor scripts; they use only
+the standard library. Bundled artifact skills may have additional requirements.
 
-Or manually create the symlinks after cloning:
-```bash
-# From the repo root
-mklink CLAUDE.md AGENTS.md
-mklink GEMINI.md AGENTS.md
-cd .agent
-mklink /D workflows "..\Operator Team OS\4. Workflows"
-```
+## 2. Customize without breaking the architecture
 
-### 2. Set Up Environment Variables (Optional)
+1. Read `Operator Team OS/AGENTS.md` and `Operator Team OS/WIKI.md`.
+2. Replace placeholders in `6. Memory/ACTIVE.md` and `LONG_TERM.md`.
+3. Keep durable facts out of Long-Term until a human confirms them.
+4. Add your own approved domain tags to `1. SOPs/knowledge-graph-schema.md`.
+5. Copy `Drive - Example/` to a clearly named knowledge library such as
+   `Drive - Operations/`. Keep restricted libraries separate.
+6. Add SOPs, skills, and workflows only when the responsibility belongs there.
 
-**Most users can skip this step.** If you're using Claude Code, Antigravity, Cursor, or similar platforms, the AI handles its own API calls—you don't need to configure anything.
-
-You only need a `.env` file if:
-- You're using MCP servers that require authentication (GitHub, Slack, etc.)
-- You're building custom skills that call external APIs
-
-If you do need it:
+## 3. Use memory retrieval
 
 ```bash
-cp .env.example .env
+python3 "Operator Team OS/3. Skills/memory-read/scripts/build_index.py"
+python3 "Operator Team OS/3. Skills/memory-read/scripts/query.py" \
+  --query "current priorities"
 ```
 
-Example `.env` contents:
+To include a knowledge library, pass it explicitly with `--include`. Do not put
+libraries with different permissions into the same index.
 
-```env
-# Only add what you actually need:
-GITHUB_TOKEN=your_token_here      # For GitHub MCP server
-SLACK_TOKEN=your_token_here       # For Slack MCP server
-OPENROUTER_API_KEY=your_key_here  # For custom skills that call LLMs
-```
-
-**Important**: Never commit `.env` to version control. It's already in `.gitignore`.
-
-### 3. Install Python Dependencies (Optional)
-
-If you plan to run the skills that use Python scripts:
+## 4. Save a session handoff
 
 ```bash
-# Create virtual environment
-python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
+python3 "Operator Team OS/3. Skills/memory-manage/scripts/append_session_log.py" \
+  --topics "Operations planning" \
+  --decision "Use one canonical SOP" \
+  --action "Owner to validate the rollout" \
+  --verification "Workspace doctor passed"
 ```
 
-> **Note**: Some skills include their own `requirements.txt`. Install as needed.
+Logs are concise handoffs, not transcripts. Rebuild the memory index afterward.
 
-### 4. Configure MCP Servers (Optional)
+## 5. Connect an AI platform
 
-MCP (Model Context Protocol) lets AI platforms connect to external tools like GitHub, Slack, or databases.
+Most coding agents discover root `AGENTS.md`, `CLAUDE.md`, or `GEMINI.md`. These
+are ordinary pointer files so they survive OneDrive, Dropbox, and SharePoint sync.
+If another platform needs a special directory, add a small wrapper that routes to
+canonical content; do not copy policy into a second source of truth.
 
-**Each platform handles MCP differently.** Check your platform's documentation:
-- Antigravity, Claude Code, and similar tools have their own MCP configuration methods
-- Some platforms auto-detect servers, others require manual setup
-- The `.agent/mcp_config.json` file in this repo is an example that works with Antigravity. Your platform may use a different location or format
+Example workflow pointers live in `.agent/workflows/`.
 
-### 5. Set Up Workflows (Optional)
+## 6. Secrets and integrations
 
-If using Antigravity or platforms that support slash commands:
+Copy `.env.example` to `.env` and store local values there. Never commit secrets.
+Treat `.agent/mcp_config.json` as a structural example only; use environment
+variables or your platform's secret store for credentials. External actions such
+as sending, publishing, spending, deployment, or recurrence need explicit human
+authorization.
 
-The workflows are already symlinked:
-```
-.agent/workflows/ → Operator Team OS/4. Workflows/
-```
+## 7. Validate changes
 
-If you need to recreate the symlink:
-```bash
-cd .agent/workflows
-ln -s ../../Operator Team OS/4. Workflows/* .
-```
-
-## Platform-Specific Setup
-
-### For Anthropic Claude (API)
-
-The repository includes a `CLAUDE.md` file that symlinks to `AGENTS.md`. Claude-based platforms will automatically detect this.
-
-```python
-import anthropic
-
-client = anthropic.Anthropic(api_key="your_key")
-
-# Point Claude to the CLAUDE.md file (or AGENTS.md)
-with open("CLAUDE.md", "r") as f:
-    system_prompt = f.read()
-
-# Use in your agent loop
-```
-
-### For Google Gemini
-
-The repository includes a `GEMINI.md` file that symlinks to `AGENTS.md`. Gemini-based platforms will automatically detect this.
-
-If the symlink doesn't work on your system:
-```bash
-# Create the symlink manually
-ln -s AGENTS.md GEMINI.md
-```
-
-### For Cursor
-
-1. Open Cursor in the `operator-os` directory
-2. The AI will automatically see all files
-3. In your first message, reference: "Read `AGENTS.md` to understand the system architecture"
-4. Reference specific agents: "Act as the Research Agent defined in `Operator Team OS/2. Agents/ResearchAgent.md`"
-
-### For Antigravity
-
-1. Antigravity automatically recognizes `.agent/` folder
-2. Workflows are already symlinked to `.agent/workflows/`
-3. Use workflows with `/` commands: `/consult-board`, `/weekly-review`
-4. MCP servers auto-load from `.agent/mcp_config.json`
-
-
-## First Steps
-
-### 1. Read AGENTS.md
-
-This is the core document. It explains:
-- The 5-layer architecture
-- How layers interact
-- Operating principles
-- File organization rules
+After structural edits:
 
 ```bash
-# Read in your terminal
-cat AGENTS.md
-
-# Or open in your editor
+python3 "Operator Team OS/3. Skills/workspace-doctor/scripts/operator_doctor.py"
+python3 -m unittest discover -s tests -p 'test_*.py'
+git diff --check
+git status --short
 ```
 
-### 2. Explore the Examples
-
-**SOPs**: Check out `Operator Team OS/1. SOPs/` to see how to document processes
-
-**Agents**: Review `Operator Team OS/2. Agents/Board-Strategy.md` to see a persona definition
-
-**Skills**: Look at `Operator Team OS/3. Skills/pdf-conversion/` to see how skills are structured
-
-**Workflows**: Try `/consult-board` to ask strategic questions
-
-## Customize for Your Needs
-
-### Add Your Own SOPs
-
-Create a new file in `Operator Team OS/1. SOPs/`:
-
-```bash
-touch "Operator Team OS/1. SOPs/my-custom-process.md"
-```
-
-Follow the template structure:
-- Goal
-- Context
-- Inputs
-- Outputs
-- Process steps
-- Edge cases
-- Expected output
-
-### Create Custom Agents
-
-Create a new agent in `Operator Team OS/2. Agents/`:
-
-```bash
-touch "Operator Team OS/2. Agents/MyCustomAgent.md"
-```
-
-Define:
-- Purpose
-- Persona & expertise
-- Voice & style
-- Model preference
-- Tools they can use
-- Decision-making approach
-- Output format
-- Guardrails
-
-### Build New Skills
-
-This repo includes example skills from [Anthropic's skills repository](https://github.com/anthropics/skills), including document creation (docx, xlsx, pptx) and PDF conversion.
-
-**Find more skills:**
-- [Anthropic's official skills](https://github.com/anthropics/skills) - Official skills from Anthropic
-- [Superpowers](https://github.com/obra/superpowers) - Community skills collection
-- [Awesome Claude Skills](https://github.com/travisvn/awesome-claude-skills) - Curated list of skills
-
-To build your own, use the `skill-creator` meta-skill:
-
-```
-Agent: "Create a new skill for [task description]"
-```
-
-Or manually:
-```bash
-mkdir "Operator Team OS/3. Skills/my-new-skill"
-touch "Operator Team OS/3. Skills/my-new-skill/SKILL.md"
-mkdir "Operator Team OS/3. Skills/my-new-skill/scripts"
-```
-
-### Add Workflows
-
-Create a workflow in `Operator Team OS/4. Workflows/`:
-
-```bash
-touch "Operator Team OS/4. Workflows/my-workflow.md"
-```
-
-Format:
-```yaml
----
-description: Short description of what this does
----
-
-## Steps
-
-1. First thing to do
-2. Second thing to do
-// turbo  ← Optional: auto-run this step
-3. Third thing to do
-```
-
-## Troubleshooting
-
-### Agent Can't Find Files
-- **Check**: Are you in the right directory?
-- **Fix**: Use absolute paths or ensure the agent's working directory is correct
-
-### MCP Server Not Loading
-- **Check**: Is the server in `.agent/mcp_config.json`?
-- **Check**: Are environment variables set in `.env`?
-- **Fix**: Restart your AI platform after config changes
-
-### Python Script Errors
-- **Check**: Did you activate the virtual environment?
-- **Check**: Are dependencies installed?
-- **Fix**: `pip install -r requirements.txt`
-
-### Workflows Not Showing Up
-- **Check**: Is `.agent/workflows/` symlinked correctly?
-- **Fix**: `cd .agent/workflows && ln -s ../../Operator Team OS/4. Workflows/* .`
-
-## Advanced Configuration
-
-### Dynamic Drive Paths
-
-Use `drive_path.py` to avoid hardcoding folder names:
-
-```python
-from drive_path import get_drive_path
-
-drive_name = get_drive_path()  # Returns "Drive - ProjectX"
-file_path = f"{drive_name}/Data/myfile.csv"
-```
-
-### Self-Annealing
-
-When scripts break:
-1. Agent reads error
-2. Fixes the script
-3. Tests the fix
-4. Updates SKILL.md with lessons learned
-
-Enable this by telling your agent: "Self-anneal when errors occur (see AGENTS.md)"
-
-## Next Steps
-
-1. **Customize**: Replace "ProjectX" with your actual project name
-2. **Build**: Add your own SOPs, agents, and skills
-3. **Share**: If you build something cool, contribute back!
-4. **Join the community**: [Add Discord/forum link]
-
-## Getting Help
-
-- **Documentation**: Read `AGENTS.md` thoroughly
-- **Examples**: Study the included skills and SOPs
-- **Issues**: Open a GitHub issue if you find bugs
-- **Community**: Share your use case and get help from others
-
----
-
-**Ready to build?** Just start a conversation with your AI and tell it what you need!
+Review the diff before committing or pushing.

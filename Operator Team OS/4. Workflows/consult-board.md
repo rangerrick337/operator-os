@@ -1,4 +1,9 @@
 ---
+type: workflow
+triggers: [/consult-board]
+requires: []
+status: active
+tags: [type/workflow, status/active, domain/operations]
 description: Consult with the Stable of Experts (Strategy, Risk, Product, Mindset)
 ---
 

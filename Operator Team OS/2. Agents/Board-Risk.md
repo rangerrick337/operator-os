@@ -1,3 +1,11 @@
+---
+type: agent
+title: Investment and Risk Advisory Board
+domain: finance
+status: active
+tags: [type/agent, status/active, domain/finance]
+---
+
 # Agent: Investment & Risk Advisory Board
 
 ## Persona

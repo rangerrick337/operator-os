@@ -1,3 +1,11 @@
+---
+type: agent
+title: Human Nature and Mindset Advisory Board
+domain: people
+status: active
+tags: [type/agent, status/active, domain/people]
+---
+
 # Agent: Human Nature & Mindset Advisory Board
 
 ## Persona

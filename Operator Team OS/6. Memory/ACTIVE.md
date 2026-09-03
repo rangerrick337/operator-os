@@ -1,16 +1,31 @@
+---
+type: memory
+tier: active
+last-reviewed: 2026-09-03
+tags: [type/memory, tier/active, status/active]
+---
+
 # Active Context
-> Company dashboard — who's working on what, with links to deeper files.
-> Updated weekly (or when priorities shift).
-> Last updated: YYYY-MM-DD
 
-## [USER_NAME]
-- **Focus**: [CURRENT_FOCUS]
-- **Key Files**:
-  - [[FILE_LABEL]]([RELATIVE_PATH])
-- **Where We're At**: [STATUS_DESCRIPTION]
+> A concise dashboard of current focus, blockers, next actions, and links.
+> Update when priorities materially change; do not store history here.
 
-## Company-Wide
-- **Active Blockers**:
-  - [BLOCKER_DESCRIPTION]
-- **Recent Decisions**:
-  - YYYY-MM-DD: [DECISION_DESCRIPTION]
+## Current focus
+
+- [Primary outcome]
+
+## Blockers
+
+- [Blocker, owner, and resolution path]
+
+## Next actions
+
+- [Owner] — [action] — [target date]
+
+## Key sources
+
+- [[WIKI|Operator OS Wiki]]
+
+## Recent confirmed decisions
+
+- YYYY-MM-DD — [decision and source]

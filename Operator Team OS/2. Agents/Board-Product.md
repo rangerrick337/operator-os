@@ -1,3 +1,11 @@
+---
+type: agent
+title: Product, Design, and Creative Advisory Board
+domain: product
+status: active
+tags: [type/agent, status/active, domain/product]
+---
+
 # Agent: Product, Design & Creative Advisory Board
 
 ## Persona

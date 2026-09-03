@@ -2,6 +2,9 @@
 .env
 .env.local
 .env.*.local
+.secrets/
+*.p12
+*.pfx
 
 # Python
 __pycache__/
@@ -25,8 +28,12 @@ wheels/
 .installed.cfg
 *.egg
 venv/
+.venv/
 ENV/
 env/
+.cache/
+.next/
+.turbo/
 
 # OAuth & Credentials
 credentials.json
@@ -38,6 +45,10 @@ token.json
 *.log
 z_temp/*
 !z_temp/.gitkeep
+**/z_temp/*
+!**/z_temp/.gitkeep
+**/z_archive/
+**/z_Archive/
 
 # OS Files
 .DS_Store
@@ -60,14 +71,21 @@ temp/
 
 # Drive folders (user data)
 Drive - */*
+!Drive - Example/
 !Drive - Example/.gitkeep
+!Drive - Example/README.md
+!Drive - Example/sample-data.csv
 
 # MCP secrets (config structure is OK, but not filled-in secrets)
 # .agent/mcp_config.json should be committed as a template
 
 # Node modules (if using MCP servers)
 node_modules/
-package-lock.json
+
+# Generated retrieval caches
+MEMORY_READ_INDEX*.json
+MEMORY_READ_INDEX*.md
+MEMORY_NAV_INDEX*.json
 
 # Backup files
 *.bak

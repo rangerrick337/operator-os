@@ -1,237 +1,82 @@
 # Operator OS
 
-> A 5-layer architecture for running your business with AI agents
+> A portable six-layer operating system for reliable AI-assisted business work.
 
-## Background
+Operator OS gives humans and AI agents one shared, inspectable structure for
+process, execution, knowledge, and memory. It is based on an operating system
+used in a real business, generalized here without company data or private rules.
 
-If you're using AI tools like Claude Code, Cursor, Antigravity, or OpenCode to help run your business, you might have run into some of these issues:
+## Why it exists
 
-- Re-explaining the same processes to your AI
-- Prompts that grow unwieldy and still miss edge cases
-- AI that "forgets" how you want things done between sessions
-- Scripts and automations scattered with no structure
-- Team members using AI inconsistently
+LLMs are probabilistic; many business processes require consistency. Operator OS
+separates judgment from repeatable execution so teams do not have to re-explain
+their standards every session or bury every rule in one enormous prompt.
 
-I built this framework for my own company. After iterating on it for a while, I figured it might be useful to others dealing with the same challenges.
+## The six layers
 
-## What is this?
+| Layer | Purpose | Location |
+|:---|:---|:---|
+| 1. SOPs | Durable process and governance | `Operator Team OS/1. SOPs/` |
+| 2. Agents | Optional specialist roles | `Operator Team OS/2. Agents/` |
+| 3. Skills | Task instructions and deterministic tools | `Operator Team OS/3. Skills/` |
+| 4. Workflows | Short routers and repeatable sequences | `Operator Team OS/4. Workflows/` |
+| 5. Knowledge | Permissioned business data | `Drive - *` folders |
+| 6. Memory | Active context, durable facts, session handoffs | `Operator Team OS/6. Memory/` |
 
-The Operator OS is a tool-agnostic framework that gives your AI agents a structure they can understand. It can work with Claude Code, Antigravity, OpenCode, Cursor, or whatever comes next. They all read the same files and follow the same instructions.
+The numbered `5. Implementation Plans/` folder tracks approved changes to the OS;
+business knowledge stays outside the OS container so permissions remain clear.
 
-The core idea: LLMs are probabilistic. Business processes are deterministic. This framework separates those concerns.
+## What is new in 2.0
 
-## How it helps
+- One canonical policy file with portable, non-symlink discovery pointers
+- Query-first memory retrieval instead of loading whole memory files
+- Atomic session handoffs instead of shared daily-log appends
+- Human approval before durable facts enter Long-Term memory
+- A knowledge-graph schema, master WIKI, and audit/intake workflows
+- A read-only workspace doctor and lightweight context-audit skill
+- Stronger privacy, secret, dependency, cache, and cloud-sync hygiene
 
-**Structure**: Clear separation between instructions, personas, skills, workflows, and data
-
-**Reusability**: Write a process once, use it across sessions and team members
-
-**Self-improvement**: Agents can update documentation when they learn something new
-
-**Platform flexibility**: Not locked into any one AI tool
-
-## The 5 Layers
-
-```
-┌─────────────────────────────────────────┐
-│  Layer 1: SOPs (What to do)             │  ← Natural language instructions
-├─────────────────────────────────────────┤
-│  Layer 2: Agents (Who to be)            │  ← Specialized personas
-├─────────────────────────────────────────┤
-│  Layer 3: Skills (How to execute)       │  ← Deterministic Python scripts
-├─────────────────────────────────────────┤
-│  Layer 4: Workflows (Sequences)         │  ← Step-by-step automation
-├─────────────────────────────────────────┤
-│  Layer 5: Knowledge Base (Data)         │  ← Unstructured information
-└─────────────────────────────────────────┘
-```
-
-### Layer 1: SOPs
-
-Human-readable process documentation. "Here's what needs to happen and why."
-
-### Layer 2: Agents
-
-Specialized personas with defined expertise, voice, and tool permissions. Switch between a Research Agent, Copywriter, or consult your Board of Advisors.
-
-### Layer 3: Skills
-
-Anthropic-format skills with deterministic Python scripts. The AI reads instructions, executes code, handles errors, and self-improves the system.
-
-### Layer 4: Workflows
-
-Sequential "slash command" automations for repetitive tasks. `/consult-board`, `/weekly-review`.
-
-### Layer 5: Knowledge Base
-
-Where your actual data lives. CSVs, documents, API responses.
-
-## Quick Start
-
-### 1. Clone This Repo
+## Quick start
 
 ```bash
-git clone https://github.com/yourusername/operator-os.git
+git clone https://github.com/rangerrick337/operator-os.git
 cd operator-os
+python3 "Operator Team OS/3. Skills/workspace-doctor/scripts/operator_doctor.py"
 ```
 
-### 2. Choose Your AI Platform
+Then ask your AI tool: “Read `AGENTS.md` and help me customize Operator OS.”
 
-This framework can work with:
+Useful entrypoints:
 
-- **Claude Code** (Code or API)
-- **Antigravity**
-- **Open Code**
-- **Cursor**
-- Any AI that supports file context and tool use
+- `Operator Team OS/WIKI.md` — map of the system
+- `/start` — begin with compact context
+- `/memory` — retrieve, save, review, intake, or audit context
+- `/wrap-up` — surface confidence gaps and blind spots
+- `SETUP.md` — customize the template safely
 
-### 3. Read the Docs
+## Included skills
 
-Start with `AGENTS.md` to understand the architecture, then explore:
+- `memory-read` — heading-level, source-linked local retrieval
+- `memory-manage` — Active updates, proposals, and session handoffs
+- `workspace-doctor` — read-only structural and portability checks
+- `ai-context-optimizer` — detect duplicated or stale AI-facing context
+- `wrap-up` — end-of-session uncertainty and blind-spot review
+- Document, presentation, spreadsheet, and conversion examples from the original
+  public release remain available for teams that need artifact workflows.
 
-- `Operator Team OS/1. SOPs/` for example processes
-- `Operator Team OS/2. Agents/` for example persona definitions
-- `Operator Team OS/3. Skills/` for example automation utilities
-- `Operator Team OS/4. Workflows/` for example quick-start commands
+## Design principles
 
-### 4. Try It Out
+- One canonical source; small platform pointers
+- Progressive disclosure; load only what the task needs
+- Deterministic scripts for repeatable mechanics
+- Explicit permission boundaries for knowledge and memory
+- Evidence before synthesis; human approval at consequential write boundaries
+- Reversible maintenance and inspectable Markdown
 
-Most AI platforms will automatically read `AGENTS.md` and understand the system. Just start a conversation!
-
-Some included workflows you can try:
-
-- `/consult-board` - Get strategic advice from AI thought leaders
-- `/weekly-review` - Summarize progress and plan next steps
-
-## Real-World Examples
-
-### Example 1: Board of Advisors
-
-Consult with simulated versions of Clayton Christensen, Indra Nooyi, Daniel Kahneman, and Steve Jobs for strategic advice.
-
-**Usage**: `/consult-board` → "Should I pivot our product strategy?"
-
-### Example 2: Data Processing
-
-Automated ETL workflows with validation, error handling, and logging.
-
-**Usage**: Agent reads SOP → Finds skill → Executes script → Reports results
-
-### Example 3: Document Generation
-
-Generate branded DOCX, PPTX, or XLSX files.
-*(Includes example skills from [Anthropic's skills repository](https://github.com/anthropics/skills))*
-
-**Usage**: Agent calls skill → Populates template → Outputs formatted document
-
-## Key Features
-
-### Progressive Disclosure
-
-Agents only load what they need. YAML frontmatter → Full instructions → Script execution.
-
-### Self-Annealing
-
-When errors occur, the system fixes itself:
-
-1. Agent encounters error
-2. Reads stack trace
-3. Fixes the script
-4. Updates documentation
-5. System is now stronger
-
-### Tool Permissions
-
-Fine-grained control over which agents can use which tools. Research Agent gets `search_web`, Data Agent gets `run_command`.
-
-### MCP Integration
-
-Plug in external tools via Model Context Protocol (GitHub, Slack, Databases, etc.)
-
-## Folder Structure
-
-```
-operator-os/
-├── AGENTS.md              # Core architecture documentation
-├── CLAUDE.md              → AGENTS.md (symlink)
-├── GEMINI.md              → AGENTS.md (symlink)
-├── README.md              # This file
-├── SETUP.md               # Detailed setup guide
-├── .env.example           # API key template
-├── .gitignore
-│
-├── .agent/                # Platform-specific configuration
-│   ├── mcp_config.json    # MCP server definitions
-│   └── workflows/         → Operator Team OS/4. Workflows/ (symlink)
-│
-├── Operator Team OS/      # Operating system container
-│   ├── 1. SOPs/           # Standard Operating Procedures
-│   ├── 2. Agents/         # Agent persona definitions
-│   ├── 3. Skills/         # Executable skills with scripts
-│   ├── 4. Workflows/      # Sequential automation
-│   └── z_temp/            # Temporary processing files
-│
-└── Drive - Example/       # Example data folder
-```
-
-## Philosophy
-
-### Deterministic > Probabilistic
-
-Push complexity into Python scripts that do one thing reliably. Let AI orchestrate, not execute.
-
-### Living Documentation
-
-SOPs and skills self-improve as agents encounter edge cases and learn better approaches.
-
-### Separation of Concerns
-
-Don't mix "what to do", "who does it", and "how to do it". Each layer has a job.
-
-### Progressive Complexity
-
-Start simple. Add layers only when needed. No premature abstraction.
-
-## Platform-Specific Notes
-
-This framework is **tool-agnostic** by design, but different AI platforms may require minor tweaks:
-
-- **Antigravity**: Automatically detects `.agent/` folder and workflows. Slash commands work out of the box.
-- **Claude Code**: Reference agents directly: "Act as ResearchAgent from `Operator Team OS/2. Agents/ResearchAgent.md`"
-- **Cursor**: Works natively with file context. Point to `AGENTS.md` in your first message.
-- **Gemini**: Create `GEMINI.md` symlink to `AGENTS.md` (instructions in SETUP.md)
-- **Custom setups**: You may need to adjust symlinks or add platform-specific config files
-
-See `SETUP.md` for detailed platform setup instructions.
-
-## About This Project
-
-This is a personal framework I refined for my own business and decided to share as a template. It is not an actively maintained open-source project, so I am not accepting pull requests. Feel free to fork it and make it your own!
-
-## Need Help Getting Started?
-
-I built this system for my own business. If you're an SMB or solo operator looking to implement this framework but need guidance on:
-
-- Adapting the architecture to your specific business
-- Building custom skills for your workflows
-- Setting this up for a team of users
-- Training your team to use agent-driven operations
-- Integrating with your existing tools and systems
-
-**I'm available for consulting engagements to help you set this up.**
-
-Reach out to me on [LinkedIn](https://www.linkedin.com/in/rick-lee/) to start the conversation.
-
-I believe every small business should have access to sophisticated AI operations, and I'm here to help make that happen.
+Operator OS is platform-agnostic. Different tools may need small discovery
+wrappers, but canonical policy, skills, and workflows stay under `Operator Team OS/`.
 
 ## License
 
-MIT License - see LICENSE file for details.
-
-## Learn More
-
-- **Full Documentation**: See `AGENTS.md`
-- **Setup Guide**: See `SETUP.md`
-- **Example Skills**: Explore `Operator Team OS/3. Skills/`
-
-
+MIT. See `LICENSE` and retain any additional license files shipped with bundled
+third-party skills.
