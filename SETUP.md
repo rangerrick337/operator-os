@@ -46,12 +46,13 @@ Logs are concise handoffs, not transcripts. Rebuild the memory index afterward.
 
 ## 5. Connect an AI platform
 
-Most coding agents discover root `AGENTS.md`, `CLAUDE.md`, or `GEMINI.md`. These
-are ordinary pointer files so they survive OneDrive, Dropbox, and SharePoint sync.
+Cursor, Codex, Claude Code, and Antigravity read the root `AGENTS.md` natively. It is
+an ordinary pointer file so it survives OneDrive, Dropbox, and SharePoint sync.
+Do not add a `CLAUDE.md`: Claude Code reads `AGENTS.md` only when no `CLAUDE.md`
+exists. Gemini CLI reads `GEMINI.md` by default; to use `AGENTS.md` instead, add
+`{ "context": { "fileName": "AGENTS.md" } }` to your own `.gemini/settings.json`.
 If another platform needs a special directory, add a small wrapper that routes to
 canonical content; do not copy policy into a second source of truth.
-
-Example workflow pointers live in `.agent/workflows/`.
 
 ## 6. Secrets and integrations
 

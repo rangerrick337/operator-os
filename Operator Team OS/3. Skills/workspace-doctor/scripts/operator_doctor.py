@@ -10,7 +10,7 @@ import subprocess
 from pathlib import Path
 
 REQUIRED = [
-    "AGENTS.md", "CLAUDE.md", "GEMINI.md", "README.md", "SETUP.md",
+    "AGENTS.md", "README.md", "SETUP.md",
     "Operator Team OS/AGENTS.md", "Operator Team OS/WIKI.md",
     "Operator Team OS/VERSION", "Operator Team OS/CHANGELOG.md",
     "Operator Team OS/1. SOPs/knowledge-graph-schema.md",
@@ -22,9 +22,11 @@ REQUIRED = [
     "Operator Team OS/6. Memory/logs",
     "Operator Team OS/6. Memory/proposals",
 ]
-POINTERS = ["AGENTS.md", "CLAUDE.md", "GEMINI.md"]
+POINTERS = ["AGENTS.md"]
+# A CLAUDE.md makes Claude Code ignore AGENTS.md; GEMINI.md is unnecessary duplication.
+LEGACY_POINTERS = ["CLAUDE.md", "GEMINI.md"]
 CORE_TEXT = [
-    "AGENTS.md", "CLAUDE.md", "GEMINI.md", "README.md", "SETUP.md",
+    "AGENTS.md", "README.md", "SETUP.md",
     "Operator Team OS/AGENTS.md", "Operator Team OS/WIKI.md",
 ]
 
@@ -62,6 +64,8 @@ def main() -> int:
     for name in POINTERS:
         path = root / name
         checks.append((path.exists() and not path.is_symlink(), f"portable pointer: {name}"))
+    legacy = [name for name in LEGACY_POINTERS if (root / name).exists()]
+    checks.append((not legacy, "no legacy per-tool instruction files" + (f": {', '.join(legacy)}" if legacy else "")))
     version = (root / "Operator Team OS/VERSION").read_text().strip()
     checks.append((bool(re.fullmatch(r"\d+\.\d+\.\d+", version)), "semantic VERSION"))
 
@@ -81,7 +85,7 @@ def main() -> int:
             offenders.append(name)
     checks.append((not offenders, "no machine-specific paths in core docs" + (f": {', '.join(offenders)}" if offenders else "")))
 
-    linked_roots = [root / ".agent", root / ".opencode"]
+    linked_roots = [root / ".agent"]
     symlinks = [path.relative_to(root).as_posix() for base in linked_roots if base.exists() for path in base.rglob("*") if path.is_symlink()]
     checks.append((not symlinks, "no cloud-fragile platform symlinks" + (f": {', '.join(symlinks)}" if symlinks else "")))
 
